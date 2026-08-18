@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Nova Shop | Premium Online Store</title>
+    <!-- NovaShop demo. Konfiguracja Parloa: blok NOVASHOP_CONFIG na dole pliku. -->
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f7fb;
+  color: #1f2937;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #111827;
+}
+
+.nav {
+  display: flex;
+  gap: 22px;
+  color: #4b5563;
+}
+
+.nav a:hover {
+  color: #111827;
+}
+
+.cart-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  padding: 72px 32px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.hero-text .eyebrow {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  line-height: 1.05;
+  margin: 0 0 18px;
+  color: #111827;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #6b7280;
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.primary-btn {
+  background: #111827;
+  color: white;
+}
+
+.secondary-btn {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+.hero-image-card {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #dbeafe, #fce7f3);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(17, 24, 39, 0.12);
+}
+
+.product-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.mock-product {
+  width: 220px;
+  height: 320px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #111827, #374151);
+  position: absolute;
+  right: 55px;
+  bottom: 35px;
+  transform: rotate(10deg);
+}
+
+.stats {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 32px 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.stat {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.stat strong {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.stat span {
+  color: #6b7280;
+}
+
+.products,
+.collections,
+.banner,
+.footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 60px;
+}
+
+.section-title {
+  margin-bottom: 22px;
+}
+
+.section-title h2 {
+  font-size: 2rem;
+  margin: 0 0 8px;
+  color: #111827;
+}
+
+.section-title p {
+  color: #6b7280;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.product-image {
+  height: 220px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+}
+
+.product-image.blue { background: linear-gradient(135deg, #93c5fd, #1d4ed8); }
+.product-image.beige { background: linear-gradient(135deg, #fde68a, #d97706); }
+.product-image.green { background: linear-gradient(135deg, #86efac, #16a34a); }
+.product-image.pink { background: linear-gradient(135deg, #f9a8d4, #db2777); }
+
+.product-card h3 {
+  margin: 0 0 6px;
+  color: #111827;
+}
+
+.product-card p {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.price-row button {
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.collections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.collection-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 28px;
+  min-height: 180px;
+}
+
+.collection-card h2 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.collection-card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.banner {
+  background: linear-gradient(135deg, #111827, #374151);
+  border-radius: 26px;
+  color: white;
+  padding: 32px;
+  margin-bottom: 40px;
+}
+
+.banner h2 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.banner p {
+  margin: 0;
+  color: #d1d5db;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 80px;
+  color: #4b5563;
+}
+
+.footer h3,
+.footer h4 {
+  color: #111827;
+}
+
+/* Chat widget */
+.chat-widget {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-toggle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #111827;
+  color: white;
+  font-size: 1.4rem;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.22);
+  cursor: pointer;
+}
+
+.chat-window {
+  width: 340px;
+  height: 520px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.18);
+}
+
+.chat-window.open {
+  display: flex;
+}
+
+.chat-header {
+  padding: 14px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.chat-status {
+  font-size: 0.8rem;
+  color: #10b981;
+  margin-top: 2px;
+}
+
+.close-chat {
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+}
+
+.user-message,
+.bot-message {
+  max-width: 85%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.user-message {
+  align-self: flex-end;
+  background: #111827;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background: #f3f4f6;
+  color: #111827;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #fafafa;
+  position: sticky;
+  bottom: 0;
+  flex-shrink: 0;
+}
+
+.chat-input-area input {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.chat-input-area button {
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chat-input-area button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1100px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .hero {
+    padding: 48px 16px 30px;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .stats,
+  .collections {
+    grid-template-columns: 1fr;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .products,
+  .banner,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .chat-widget {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .chat-window {
+    width: calc(100vw - 24px);
+    height: 420px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo">NovaShop</div>
+      <nav class="nav">
+        <a href="#featured">Featured</a>
+        <a href="#collections">Collections</a>
+        <a href="#deals">Deals</a>
+        <a href="#footer">Contact</a>
+      </nav>
+      <button class="cart-btn">Cart (0)</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <span class="eyebrow">New Season Collection</span>
+          <h1>Style that fits your life</h1>
+          <p>
+            Discover premium essentials, trending fashion, and everyday items
+            selected for comfort and design.
+          </p>
+          <div class="hero-actions">
+            <a href="#featured" class="primary-btn">Shop Now</a>
+            <a href="#collections" class="secondary-btn">Explore Collections</a>
+          </div>
+        </div>
+        <div class="hero-image-card">
+          <div class="hero-image">
+            <div class="product-badge">Up to 40% Off</div>
+            <div class="mock-product"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <strong>1200+</strong>
+          <span>Products</span>
+        </div>
+        <div class="stat">
+          <strong>48h</strong>
+          <span>Fast Delivery</span>
+        </div>
+        <div class="stat">
+          <strong>4.8/5</strong>
+          <span>Customer Rating</span>
+        </div>
+      </section>
+
+      <section id="featured" class="products">
+        <div class="section-title">
+          <h2>Featured Products</h2>
+          <p>Best sellers chosen for quality, comfort, and style.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-image blue"></div>
+            <h3>Wireless Headphones</h3>
+            <p>Clear sound, long battery life.</p>
+            <div class="price-row">
+              <span class="price">$89</span>
+              <button>Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image beige"></div>
+            <h3>Minimal Backpack</h3>
+            <p>Lightweight and built for daily use.</p>
+            <div class="price-row">
+              <span class="price">$59</span>
+              <button>Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image green"></div>
+            <h3>Smart Watch</h3>
+            <p>Track your day with ease.</p>
+            <div class="price-row">
+              <span class="price">$129</span>
+              <button>Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image pink"></div>
+            <h3>Everyday Sneakers</h3>
+            <p>Comfortable for all-day wear.</p>
+            <div class="price-row">
+              <span class="price">$74</span>
+              <button>Add to Cart</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="collections" class="collections">
+        <div class="collection-card">
+          <h2>Home Essentials</h2>
+          <p>Upgrade your space with simple, modern pieces.</p>
+        </div>
+        <div class="collection-card">
+          <h2>Daily Fashion</h2>
+          <p>Clean looks for every day and every season.</p>
+        </div>
+        <div class="collection-card">
+          <h2>Tech Accessories</h2>
+          <p>Useful add-ons for your work and travel setup.</p>
+        </div>
+      </section>
+
+      <section id="deals" class="banner">
+        <div>
+          <h2>Summer Sale is Live</h2>
+          <p>Enjoy exclusive offers on selected collections.</p>
+        </div>
+        <a href="#featured" class="primary-btn">See Deals</a>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div>
+        <h3>NovaShop</h3>
+        <p>Modern shopping made simple.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>support@novashop.com</p>
+        <p>+1 (555) 123-4567</p>
+      </div>
+    </footer>
+
+    <!-- Chat widget -->
+    <div class="chat-widget" id="chatWidget">
+      <button class="chat-toggle" id="chatToggle">
+        <span>💬</span>
+      </button>
+
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <div>
+            <strong>AI Product Advisor</strong>
+            <div class="chat-status" id="chatStatus">Online</div>
+          </div>
+          <button class="close-chat" id="closeChat">×</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-input-area">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Ask about products..."
+            autocomplete="off"
+          />
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+
+    
+  
+
+    <script>
+      /* ===== KONFIGURACJA - podmien 3 wartosci ponizej ===== */
+      window.NOVASHOP_CONFIG = {
+        baseUrl:         "https://cpl-websocket.app.parloa.com",
+        clientId:        "Wapp_01KY6ZH3FA7MSRKV448SKB8P0R",
+        clientSecret:    "parloa_sk_live_jH-H5q7S1_q_Pm4N3VI2r5E_XgygFTc3-Yg7Tg",
+        channelConfigId: "a773ea45-55d7-4500-b812-732db3487adc",
+        greetingPrompt:  "hello"
+      };
+    </script>
+
+    <script>
+/* ============================================================
+   NovaShop – chat widget (Power Pages, bez backendu)
+   Woła Parloa Chat API bezpośrednio z przeglądarki.
+   Zastępuje oryginalny app.js + server.js.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var cfg = window.NOVASHOP_CONFIG || {};
+  var BASE_URL = cfg.baseUrl || "https://cpl-websocket.app.parloa.com";
+  var CLIENT_ID = cfg.clientId || "";
+  var CLIENT_SECRET = cfg.clientSecret || "";
+  var CHANNEL_ID = cfg.channelConfigId || "";
+  var GREETING_PROMPT = cfg.greetingPrompt || "hello";
+
+  var threadId = null;
+  var token = null;
+  var chatOpened = false;
+
+  var chatToggle = document.getElementById("chatToggle");
+  var chatWindow = document.getElementById("chatWindow");
+  var closeChat = document.getElementById("closeChat");
+  var chatMessages = document.getElementById("chatMessages");
+  var userInput = document.getElementById("userInput");
+  var sendBtn = document.getElementById("sendBtn");
+  var chatStatus = document.getElementById("chatStatus");
+
+  /* ---------- helpery ---------- */
+
+  function uuid() {
+    if (window.crypto && window.crypto.randomUUID) {
+      return window.crypto.randomUUID();
+    }
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      var r = (Math.random() * 16) | 0;
+      var v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  function addMessage(text, type) {
+    var el = document.createElement("div");
+    el.className = type === "user" ? "user-message" : "bot-message";
+    el.textContent = text;
+    chatMessages.appendChild(el);
+    scrollToBottom();
+    return el;
+  }
+
+  function openChat() {
+    chatWindow.classList.add("open");
+    userInput.focus();
+  }
+
+  function closeChatWindow() {
+    chatWindow.classList.remove("open");
+  }
+
+  function setBusy(isBusy, statusText) {
+    sendBtn.disabled = isBusy;
+    userInput.disabled = isBusy;
+    chatStatus.textContent = statusText;
+  }
+
+  function explainError(err) {
+    // fetch rzuca TypeError bez szczegółów, gdy zablokuje CORS
+    if (err instanceof TypeError) {
+      console.error(
+        "[NovaShop] Żądanie do Parloa nie doszło do skutku. Najczęstsza przyczyna: " +
+          "domena " +
+          window.location.origin +
+          " nie jest dozwolona w CORS po stronie Parloa. " +
+          "Poproś Parloa o dopisanie jej do allowed origins."
+      );
+    } else {
+      console.error("[NovaShop] Parloa error:", err);
+    }
+  }
+
+  /* ---------- Parloa API ---------- */
+
+  function createSession() {
+    return fetch(BASE_URL + "/v3/ag-ui/channels/" + CHANNEL_ID + "/sessions", {
+      method: "POST",
+      headers: {
+        Authorization: "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET),
+        "Content-Type": "application/json",
+        "Idempotency-Key": uuid()
+      },
+      body: JSON.stringify({
+        participantDisplayName: "Website Visitor",
+        connectionMetadata: { source: "power-pages-demo" }
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error("Session HTTP " + res.status);
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        threadId = data.threadId;
+        token = data.token;
+      });
+  }
+
+  // Czyta strumień SSE i na bieżąco dopisuje tekst do dymka bota.
+  // To ta sama pętla, którą miał server.js - tylko wykonana w przeglądarce,
+  // więc odpowiedź pojawia się na żywo zamiast dopiero na końcu.
+  function runConversation(message, onDelta) {
+    return fetch(BASE_URL + "/v3/ag-ui/runs", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        Accept: "text/event-stream"
+      },
+      body: JSON.stringify({
+        threadId: threadId,
+        runId: uuid(),
+        messages: [{ id: uuid(), role: "user", content: message }]
+      })
+    }).then(function (res) {
+      if (!res.ok) {
+        var err = new Error("Run HTTP " + res.status);
+        err.status = res.status;
+        throw err;
+      }
+      if (!res.body) {
+        // przeglądarka bez streamingu - bierzemy całość naraz
+        return res.text().then(function (text) {
+          return parseWholeStream(text, onDelta);
+        });
+      }
+
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = "";
+      var answer = "";
+      var finished = false;
+
+      function pump() {
+        return reader.read().then(function (chunk) {
+          if (chunk.done || finished) {
+            return answer;
+          }
+
+          buffer += decoder.decode(chunk.value, { stream: true });
+          var lines = buffer.split("\n");
+          buffer = lines.pop();
+
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            if (line.indexOf("data:") !== 0) {
+              continue;
+            }
+
+            var event;
+            try {
+              event = JSON.parse(line.slice(5).trim());
+            } catch (e) {
+              continue;
+            }
+
+            if (event.type === "TEXT_MESSAGE_CONTENT" && event.delta) {
+              answer += event.delta;
+              onDelta(answer);
+            }
+            if (event.type === "RUN_ERROR") {
+              throw new Error("RUN_ERROR");
+            }
+            if (event.type === "RUN_FINISHED") {
+              finished = true;
+              return answer;
+            }
+          }
+
+          return pump();
+        });
+      }
+
+      return pump();
+    });
+  }
+
+  function parseWholeStream(text, onDelta) {
+    var answer = "";
+    var lines = text.split("\n");
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim();
+      if (line.indexOf("data:") !== 0) {
+        continue;
+      }
+      try {
+        var event = JSON.parse(line.slice(5).trim());
+        if (event.type === "TEXT_MESSAGE_CONTENT" && event.delta) {
+          answer += event.delta;
+        }
+      } catch (e) {
+        /* pomijamy niepełne linie */
+      }
+    }
+    onDelta(answer);
+    return answer;
+  }
+
+  /* ---------- logika czatu ---------- */
+
+  // Tworzy dymek bota dopiero przy pierwszym fragmencie odpowiedzi,
+  // potem tylko podmienia jego treść.
+  function makeStreamTarget() {
+    var bubble = null;
+    return function (fullText) {
+      if (!bubble) {
+        bubble = addMessage("", "bot");
+      }
+      bubble.textContent = fullText;
+      scrollToBottom();
+    };
+  }
+
+  function ask(message, isRetry) {
+    setBusy(true, "Typing...");
+    var onDelta = makeStreamTarget();
+
+    var ready = threadId && token ? Promise.resolve() : createSession();
+
+    return ready
+      .then(function () {
+        return runConversation(message, onDelta);
+      })
+      .then(function (answer) {
+        setBusy(false, "Online");
+        if (!answer) {
+          addMessage("Sorry, I couldn't generate a response.", "bot");
+        }
+        userInput.focus();
+      })
+      .catch(function (err) {
+        explainError(err);
+
+        // sesja mogła wygasnąć - jedna próba od zera
+        if (!isRetry && (err.status === 401 || err.status === 403)) {
+          threadId = null;
+          token = null;
+          return ask(message, true);
+        }
+
+        setBusy(false, "Offline");
+        addMessage("Sorry, something went wrong.", "bot");
+      });
+  }
+
+  function startConversation() {
+    if (chatOpened) {
+      return;
+    }
+    chatOpened = true;
+
+    chatMessages.innerHTML = "";
+    setBusy(true, "Connecting...");
+    ask(GREETING_PROMPT);
+  }
+
+  function handleSend() {
+    var message = userInput.value.trim();
+    if (!message || sendBtn.disabled) {
+      return;
+    }
+
+    addMessage(message, "user");
+    userInput.value = "";
+    ask(message);
+  }
+
+  /* ---------- zdarzenia ---------- */
+
+  chatToggle.addEventListener("click", function () {
+    if (chatWindow.classList.contains("open")) {
+      closeChatWindow();
+      return;
+    }
+    openChat();
+    startConversation();
+  });
+
+  closeChat.addEventListener("click", closeChatWindow);
+  sendBtn.addEventListener("click", handleSend);
+
+  userInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  });
+})();
+    </script>
+  </body>
+</html>
