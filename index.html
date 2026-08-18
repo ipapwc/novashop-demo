@@ -694,9 +694,9 @@ a {
       /* ===== KONFIGURACJA - podmien 3 wartosci ponizej ===== */
       window.NOVASHOP_CONFIG = {
         baseUrl:         "https://cpl-websocket.app.parloa.com",
-        clientId:        "Wapp_01KY6ZH3FA7MSRKV448SKB8P0R",
-        clientSecret:    "parloa_sk_live_jH-H5q7S1_q_Pm4N3VI2r5E_XgygFTc3-Yg7Tg",
-        channelConfigId: "a773ea45-55d7-4500-b812-732db3487adc",
+        clientId:        "WKLEJ_PARLOA_CLIENT_ID",
+        clientSecret:    "WKLEJ_PARLOA_CLIENT_SECRET",
+        channelConfigId: "WKLEJ_PARLOA_CHANNEL_CONFIG_ID",
         greetingPrompt:  "hello"
       };
     </script>
@@ -771,6 +771,19 @@ a {
     chatStatus.textContent = statusText;
   }
 
+  function failWithBody(res, label) {
+    return res.text().then(function (text) {
+      console.error(
+        "[NovaShop] " + label + " HTTP " + res.status + " – odpowiedź Parloa:",
+        text || "(puste body)"
+      );
+      var err = new Error(label + " HTTP " + res.status);
+      err.status = res.status;
+      err.body = text;
+      throw err;
+    });
+  }
+
   function explainError(err) {
     // fetch rzuca TypeError bez szczegółów, gdy zablokuje CORS
     if (err instanceof TypeError) {
@@ -798,12 +811,12 @@ a {
       },
       body: JSON.stringify({
         participantDisplayName: "Website Visitor",
-        connectionMetadata: { source: "power-pages-demo" }
+        connectionMetadata: { source: "custom-shop-frontend" }
       })
     })
       .then(function (res) {
         if (!res.ok) {
-          throw new Error("Session HTTP " + res.status);
+          return failWithBody(res, "Session");
         }
         return res.json();
       })
@@ -831,9 +844,7 @@ a {
       })
     }).then(function (res) {
       if (!res.ok) {
-        var err = new Error("Run HTTP " + res.status);
-        err.status = res.status;
-        throw err;
+        return failWithBody(res, "Run");
       }
       if (!res.body) {
         // przeglądarka bez streamingu - bierzemy całość naraz
