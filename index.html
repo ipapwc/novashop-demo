@@ -1,716 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Nova Shop | Premium Online Store</title>
-    <!-- NovaShop demo. Konfiguracja Parloa: blok NOVASHOP_CONFIG na dole pliku. -->
-    <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background: #f7f7fb;
-  color: #1f2937;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 1.3rem;
-  color: #111827;
-}
-
-.nav {
-  display: flex;
-  gap: 22px;
-  color: #4b5563;
-}
-
-.nav a:hover {
-  color: #111827;
-}
-
-.cart-btn {
-  background: #111827;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 999px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
-  padding: 72px 32px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-
-.hero-text .eyebrow {
-  display: inline-block;
-  background: #e0f2fe;
-  color: #0369a1;
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-weight: 600;
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-size: 4rem;
-  line-height: 1.05;
-  margin: 0 0 18px;
-  color: #111827;
-}
-
-.hero p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #6b7280;
-  max-width: 560px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 14px;
-  margin-top: 28px;
-}
-
-.primary-btn,
-.secondary-btn {
-  display: inline-block;
-  padding: 14px 20px;
-  border-radius: 14px;
-  font-weight: 600;
-}
-
-.primary-btn {
-  background: #111827;
-  color: white;
-}
-
-.secondary-btn {
-  background: #ffffff;
-  color: #111827;
-  border: 1px solid #e5e7eb;
-}
-
-.hero-image-card {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-image {
-  width: 100%;
-  max-width: 460px;
-  aspect-ratio: 1 / 1;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #dbeafe, #fce7f3);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(17, 24, 39, 0.12);
-}
-
-.product-badge {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: white;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 700;
-  color: #111827;
-}
-
-.mock-product {
-  width: 220px;
-  height: 320px;
-  border-radius: 30px;
-  background: linear-gradient(180deg, #111827, #374151);
-  position: absolute;
-  right: 55px;
-  bottom: 35px;
-  transform: rotate(10deg);
-}
-
-.stats {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 32px 50px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.stat {
-  background: white;
-  padding: 24px;
-  border-radius: 20px;
-  border: 1px solid #e5e7eb;
-}
-
-.stat strong {
-  display: block;
-  font-size: 2rem;
-  margin-bottom: 6px;
-  color: #111827;
-}
-
-.stat span {
-  color: #6b7280;
-}
-
-.products,
-.collections,
-.banner,
-.footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px 60px;
-}
-
-.section-title {
-  margin-bottom: 22px;
-}
-
-.section-title h2 {
-  font-size: 2rem;
-  margin: 0 0 8px;
-  color: #111827;
-}
-
-.section-title p {
-  color: #6b7280;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.product-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 22px;
-  padding: 16px;
-}
-
-.product-image {
-  height: 220px;
-  border-radius: 18px;
-  margin-bottom: 14px;
-}
-
-.product-image.blue { background: linear-gradient(135deg, #93c5fd, #1d4ed8); }
-.product-image.beige { background: linear-gradient(135deg, #fde68a, #d97706); }
-.product-image.green { background: linear-gradient(135deg, #86efac, #16a34a); }
-.product-image.pink { background: linear-gradient(135deg, #f9a8d4, #db2777); }
-
-.product-card h3 {
-  margin: 0 0 6px;
-  color: #111827;
-}
-
-.product-card p {
-  margin: 0 0 16px;
-  color: #6b7280;
-}
-
-.price-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: #111827;
-}
-
-.price-row button {
-  border: none;
-  background: #111827;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 12px;
-}
-
-.collections {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.collection-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 22px;
-  padding: 28px;
-  min-height: 180px;
-}
-
-.collection-card h2 {
-  margin-top: 0;
-  color: #111827;
-}
-
-.collection-card p {
-  color: #6b7280;
-  line-height: 1.6;
-}
-
-.banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.banner {
-  background: linear-gradient(135deg, #111827, #374151);
-  border-radius: 26px;
-  color: white;
-  padding: 32px;
-  margin-bottom: 40px;
-}
-
-.banner h2 {
-  margin: 0 0 8px;
-  font-size: 2rem;
-}
-
-.banner p {
-  margin: 0;
-  color: #d1d5db;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  padding-bottom: 80px;
-  color: #4b5563;
-}
-
-.footer h3,
-.footer h4 {
-  color: #111827;
-}
-
-/* Chat widget */
-.chat-widget {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.chat-toggle {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background: #111827;
-  color: white;
-  font-size: 1.4rem;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.22);
-  cursor: pointer;
-}
-
-.chat-window {
-  width: 340px;
-  height: 520px;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 20px;
-  margin-bottom: 12px;
-  display: none;
-  flex-direction: column;
-  overflow-y: auto;
-  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.18);
-}
-
-.chat-window.open {
-  display: flex;
-}
-
-.chat-header {
-  padding: 14px 16px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  flex-shrink: 0;
-  z-index: 1;
-}
-
-.chat-status {
-  font-size: 0.8rem;
-  color: #10b981;
-  margin-top: 2px;
-}
-
-.close-chat {
-  border: none;
-  background: transparent;
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-  color: #6b7280;
-}
-
-.chat-messages {
-  flex: 1;
-  padding: 14px;
-  overflow-y: visible;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: #ffffff;
-}
-
-.user-message,
-.bot-message {
-  max-width: 85%;
-  padding: 11px 14px;
-  border-radius: 14px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  line-height: 1.5;
-}
-
-.user-message {
-  align-self: flex-end;
-  background: #111827;
-  color: white;
-  border-bottom-right-radius: 4px;
-}
-
-.bot-message {
-  align-self: flex-start;
-  background: #f3f4f6;
-  color: #111827;
-  border-bottom-left-radius: 4px;
-}
-
-.chat-input-area {
-  display: flex;
-  gap: 10px;
-  padding: 12px;
-  border-top: 1px solid #e5e7eb;
-  background: #fafafa;
-  position: sticky;
-  bottom: 0;
-  flex-shrink: 0;
-}
-
-.chat-input-area input {
-  flex: 1;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  padding: 12px 14px;
-  outline: none;
-  font-size: 0.95rem;
-}
-
-.chat-input-area button {
-  border: none;
-  background: #111827;
-  color: white;
-  padding: 12px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.chat-input-area button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-@media (max-width: 1100px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Knowledge Assistant | Chat API Demo</title>
+<!-- Knowledge Assistant demo. Konfiguracja Parloa: blok CHAT_WIDGET_CONFIG na dole pliku. -->
+<style>
+  :root {
+    --brand-orange: #D04A02;
+    --brand-black: #000000;
+    --brand-white: #FFFFFF;
+    --grey-border: #E0E0E0;
+    --grey-bubble: #F3F3F3;
+    --content-max-width: 700px;
+    --side-padding: 60px;
+    --widget-space: 380px; /* reserved space on the right for chat widget */
   }
 
-  .hero {
-    grid-template-columns: 1fr;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-}
 
-@media (max-width: 768px) {
-  .topbar {
+  html, body {
+    background: var(--brand-white);
+    color: var(--brand-black);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: Georgia, 'ITC Charter', serif;
+    font-weight: normal;
+    color: var(--brand-black);
+  }
+
+  em, i {
+    font-style: normal; /* italics not allowed per brand guidelines */
+  }
+
+  /* ===== LAYOUT WRAPPER =====
+     Content is pushed left; right-hand space reserved for the chat widget */
+  .page-wrapper {
+    max-width: calc(var(--content-max-width) + (2 * var(--side-padding)) + var(--widget-space));
+    margin: 0;
+  }
+
+  .container {
+    max-width: var(--content-max-width);
+    margin: 0;
+    padding: 0 var(--side-padding);
+  }
+
+  /* ===== LANGUAGE TOGGLE ===== */
+  .lang-bar {
+    text-align: left;
+    padding: 20px var(--side-padding);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .lang-bar span {
+    cursor: pointer;
+    color: var(--brand-black);
+  }
+
+  .lang-bar span.active {
+    color: var(--brand-orange);
+    text-decoration: underline;
+  }
+
+  .lang-bar .divider {
+    margin: 0 8px;
+    color: var(--grey-border);
+  }
+
+  body.lang-de .lang-en-only { display: none; }
+  body:not(.lang-de) .lang-de-only { display: none; }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    max-width: var(--content-max-width);
+    margin: 0;
+    padding: 0 var(--side-padding) 30px;
+    border-bottom: 1px solid var(--brand-black);
+  }
+
+  .site-header .tagline {
+    font-size: 13px;
+    color: var(--brand-black);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  main {
+    padding: 50px 0 80px;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  p {
+    margin-bottom: 18px;
+  }
+
+  .lead {
+    font-size: 18px;
+  }
+
+  .orange-mark {
+    color: var(--brand-orange);
+  }
+
+  .pointer-text {
+    font-size: 15px;
+    padding: 16px 0;
+    border-top: 1px solid var(--brand-black);
+    border-bottom: 1px solid var(--brand-black);
+    margin: 30px 0;
+  }
+
+  .pointer-text .orange-mark {
+    font-weight: bold;
+  }
+
+  .disclaimer {
+    font-size: 13px;
+    color: var(--brand-black);
+    border: 1px solid var(--grey-border);
+    padding: 16px 20px;
+    margin-top: 60px;
+    max-width: var(--content-max-width);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    max-width: var(--content-max-width);
+    margin: 0;
+    padding: 30px var(--side-padding) 50px;
+    border-top: 1px solid var(--brand-black);
+    font-size: 12.5px;
+    color: var(--brand-black);
+  }
+
+  /* Collapse reserved widget space on smaller screens */
+  @media (max-width: 1100px) {
+    :root {
+      --widget-space: 0px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --side-padding: 24px;
+    }
+    h1 { font-size: 26px; }
+  }
+
+  /* ===== CHAT WIDGET ===== */
+  .chat-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+  }
+
+  .chat-toggle {
+    width: 60px;
+    height: 60px;
+    border: none;
+    background: var(--brand-orange);
+    color: var(--brand-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    transition: background-color 0.15s ease;
+  }
+
+  .chat-toggle:hover {
+    background: var(--brand-black);
+  }
+
+  .chat-toggle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .chat-toggle .icon-close { display: none; }
+  .chat-widget.is-open .chat-toggle .icon-chat { display: none; }
+  .chat-widget.is-open .chat-toggle .icon-close { display: block; }
+
+  .chat-window {
+    width: 350px;
+    height: 540px;
+    max-height: calc(100vh - 124px);
+    margin-bottom: 14px;
+    background: var(--brand-white);
+    border: 1px solid var(--brand-black);
+    border-top: 4px solid var(--brand-orange);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  }
+
+  .chat-widget.is-open .chat-window {
+    display: flex;
+  }
+
+  .chat-header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px 16px 12px 18px;
+    border-bottom: 1px solid var(--brand-black);
+  }
+
+  .chat-title {
+    font-family: Georgia, 'ITC Charter', serif;
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .chat-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 3px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .chat-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2E7D32;
+  }
+
+  .chat-status[data-state="busy"]::before { background: var(--brand-orange); }
+  .chat-status[data-state="offline"]::before { background: #9E9E9E; }
+
+  .close-chat {
+    border: none;
+    background: transparent;
+    color: var(--brand-black);
+    font-size: 26px;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .close-chat:hover {
+    color: var(--brand-orange);
+  }
+
+  .chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--brand-white);
+  }
+
+  .user-message,
+  .bot-message {
+    max-width: 85%;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .user-message {
+    align-self: flex-end;
+    background: var(--brand-black);
+    color: var(--brand-white);
+  }
+
+  .bot-message {
+    align-self: flex-start;
+    background: var(--grey-bubble);
+    color: var(--brand-black);
+    border-left: 3px solid var(--brand-orange);
+  }
+
+  /* Wskaźnik "pisze..." zanim przyjdzie pierwszy fragment odpowiedzi */
+  .bot-message.typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     padding: 14px 16px;
   }
 
-  .nav {
-    display: none;
+  .bot-message.typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand-black);
+    opacity: 0.25;
+    animation: typing-blink 1.2s infinite;
   }
 
-  .hero {
-    padding: 48px 16px 30px;
+  .bot-message.typing span:nth-child(2) { animation-delay: 0.2s; }
+  .bot-message.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typing-blink {
+    0%, 80%, 100% { opacity: 0.25; }
+    40% { opacity: 1; }
   }
 
-  .hero h1 {
-    font-size: 2.6rem;
+  .chat-input-area {
+    flex-shrink: 0;
+    display: flex;
+    border-top: 1px solid var(--brand-black);
   }
 
-  .stats,
-  .collections {
-    grid-template-columns: 1fr;
-    padding-left: 16px;
-    padding-right: 16px;
+  .chat-input-area input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    padding: 14px 16px;
+    font: inherit;
+    font-size: 14.5px;
+    color: var(--brand-black);
+    background: var(--brand-white);
+    outline: none;
   }
 
-  .products,
-  .banner,
-  .footer {
-    padding-left: 16px;
-    padding-right: 16px;
+  .chat-input-area input:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--brand-orange);
   }
 
-  .product-grid {
-    grid-template-columns: 1fr;
+  .chat-input-area input:disabled {
+    background: #FAFAFA;
   }
 
-  .footer {
-    flex-direction: column;
+  .chat-input-area button {
+    border: none;
+    border-left: 1px solid var(--brand-black);
+    background: var(--brand-orange);
+    color: var(--brand-white);
+    padding: 0 18px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
   }
 
-  .chat-widget {
-    right: 12px;
-    bottom: 12px;
+  .chat-input-area button:hover:not(:disabled) {
+    background: var(--brand-black);
   }
 
-  .chat-window {
-    width: calc(100vw - 24px);
-    height: 420px;
+  .chat-input-area button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
-}
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="logo">NovaShop</div>
-      <nav class="nav">
-        <a href="#featured">Featured</a>
-        <a href="#collections">Collections</a>
-        <a href="#deals">Deals</a>
-        <a href="#footer">Contact</a>
-      </nav>
-      <button class="cart-btn">Cart (0)</button>
-    </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-text">
-          <span class="eyebrow">New Season Collection</span>
-          <h1>Style that fits your life</h1>
-          <p>
-            Discover premium essentials, trending fashion, and everyday items
-            selected for comfort and design.
-          </p>
-          <div class="hero-actions">
-            <a href="#featured" class="primary-btn">Shop Now</a>
-            <a href="#collections" class="secondary-btn">Explore Collections</a>
-          </div>
-        </div>
-        <div class="hero-image-card">
-          <div class="hero-image">
-            <div class="product-badge">Up to 40% Off</div>
-            <div class="mock-product"></div>
-          </div>
-        </div>
-      </section>
+  .chat-toggle:focus-visible,
+  .close-chat:focus-visible,
+  .chat-input-area button:focus-visible {
+    outline: 2px solid var(--brand-black);
+    outline-offset: 2px;
+  }
 
-      <section class="stats">
-        <div class="stat">
-          <strong>1200+</strong>
-          <span>Products</span>
-        </div>
-        <div class="stat">
-          <strong>48h</strong>
-          <span>Fast Delivery</span>
-        </div>
-        <div class="stat">
-          <strong>4.8/5</strong>
-          <span>Customer Rating</span>
-        </div>
-      </section>
+  @media (max-width: 600px) {
+    .chat-widget {
+      right: 12px;
+      bottom: 12px;
+    }
 
-      <section id="featured" class="products">
-        <div class="section-title">
-          <h2>Featured Products</h2>
-          <p>Best sellers chosen for quality, comfort, and style.</p>
-        </div>
+    .chat-window {
+      width: calc(100vw - 24px);
+      height: calc(100vh - 100px);
+      height: calc(100dvh - 100px);
+      max-height: none;
+    }
+  }
 
-        <div class="product-grid">
-          <article class="product-card">
-            <div class="product-image blue"></div>
-            <h3>Wireless Headphones</h3>
-            <p>Clear sound, long battery life.</p>
-            <div class="price-row">
-              <span class="price">$89</span>
-              <button>Add to Cart</button>
-            </div>
-          </article>
+  @media (prefers-reduced-motion: reduce) {
+    .bot-message.typing span {
+      animation: none;
+      opacity: 0.6;
+    }
+    .chat-toggle,
+    .chat-input-area button {
+      transition: none;
+    }
+  }
+</style>
+</head>
+<body>
 
-          <article class="product-card">
-            <div class="product-image beige"></div>
-            <h3>Minimal Backpack</h3>
-            <p>Lightweight and built for daily use.</p>
-            <div class="price-row">
-              <span class="price">$59</span>
-              <button>Add to Cart</button>
-            </div>
-          </article>
+<div class="page-wrapper">
 
-          <article class="product-card">
-            <div class="product-image green"></div>
-            <h3>Smart Watch</h3>
-            <p>Track your day with ease.</p>
-            <div class="price-row">
-              <span class="price">$129</span>
-              <button>Add to Cart</button>
-            </div>
-          </article>
+  <div class="lang-bar">
+<span class="lang-option active" data-lang="en">EN</span>
+<span class="divider">|</span>
+<span class="lang-option" data-lang="de">DE</span>
+</div>
 
-          <article class="product-card">
-            <div class="product-image pink"></div>
-            <h3>Everyday Sneakers</h3>
-            <p>Comfortable for all-day wear.</p>
-            <div class="price-row">
-              <span class="price">$74</span>
-              <button>Add to Cart</button>
-            </div>
-          </article>
-        </div>
-      </section>
+  <header class="site-header">
+<div class="tagline">
+<span class="lang-en-only">Knowledge Assistant — Chat API Demo</span>
+<span class="lang-de-only">Wissensassistent — Chat-API-Demo</span>
+</div>
+</header>
 
-      <section id="collections" class="collections">
-        <div class="collection-card">
-          <h2>Home Essentials</h2>
-          <p>Upgrade your space with simple, modern pieces.</p>
-        </div>
-        <div class="collection-card">
-          <h2>Daily Fashion</h2>
-          <p>Clean looks for every day and every season.</p>
-        </div>
-        <div class="collection-card">
-          <h2>Tech Accessories</h2>
-          <p>Useful add-ons for your work and travel setup.</p>
-        </div>
-      </section>
+  <main>
+<div class="container">
 
-      <section id="deals" class="banner">
-        <div>
-          <h2>Summer Sale is Live</h2>
-          <p>Enjoy exclusive offers on selected collections.</p>
-        </div>
-        <a href="#featured" class="primary-btn">See Deals</a>
-      </section>
-    </main>
+      <h1>
+<span class="lang-en-only">Your IT Knowledge Assistant, <span class="orange-mark">available 24/7</span></span>
+<span class="lang-de-only">Ihr IT-Wissensassistent, <span class="orange-mark">rund um die Uhr verfügbar</span></span>
+</h1>
 
-    <footer id="footer" class="footer">
+      <p class="lead">
+<span class="lang-en-only">
+          This is a demonstration website showcasing a Chat API that powers a virtual
+          Knowledge Assistant. Check IT service statuses, get answers to technical questions,
+          and resolve issues — all through natural conversation.
+</span>
+<span class="lang-de-only">
+          Dies ist eine Demonstrationswebsite, die eine Chat-API präsentiert, die einen
+          virtuellen Wissensassistenten antreibt. Prüfen Sie den Status von IT-Diensten,
+          erhalten Sie Antworten auf technische Fragen und lösen Sie Probleme — alles durch
+          natürliche Konversation.
+</span>
+</p>
+
+      <div class="pointer-text">
+<span class="lang-en-only">Open the chat icon on the right-hand side of this page to start a conversation with the <span class="orange-mark">Assistant</span>.</span>
+<span class="lang-de-only">Öffnen Sie das Chat-Symbol auf der rechten Seite dieser Seite, um ein Gespräch mit dem <span class="orange-mark">Assistenten</span> zu beginnen.</span>
+</div>
+
+      <div class="disclaimer">
+<span class="lang-en-only">
+          This is a demonstration environment created solely for the purpose of showcasing the
+          Chat API. Data, statuses, and responses shown may be simulated and do not reflect real
+          production systems.
+</span>
+<span class="lang-de-only">
+          Dies ist eine Demonstrationsumgebung, die ausschließlich zur Präsentation der Chat-API
+          erstellt wurde. Die angezeigten Daten, Status und Antworten können simuliert sein und
+          spiegeln keine echten Produktionssysteme wider.
+</span>
+</div>
+
+    </div>
+</main>
+
+  <footer>
+<div>
+<span class="lang-en-only">
+        © 2025. All rights reserved. This site is for demonstration purposes only.
+</span>
+<span class="lang-de-only">
+        © 2025. Alle Rechte vorbehalten. Diese Website dient ausschließlich Demonstrationszwecken.
+</span>
+</div>
+</footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.lang-option').forEach(function (option) {
+    option.addEventListener('click', function () {
+      var lang = option.getAttribute('data-lang');
+
+      document.querySelectorAll('.lang-option').forEach(function (o) {
+        o.classList.remove('active');
+      });
+      option.classList.add('active');
+
+      if (lang === 'de') {
+        document.body.classList.add('lang-de');
+        document.documentElement.setAttribute('lang', 'de');
+      } else {
+        document.body.classList.remove('lang-de');
+        document.documentElement.setAttribute('lang', 'en');
+      }
+    });
+  });
+</script>
+
+<!-- =====================================================
+     CHAT WIDGET (Parloa Chat API)
+     Zakotwiczony w prawym dolnym rogu, w miejscu
+     zarezerwowanym przez --widget-space.
+===================================================== -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-window" id="chatWindow" role="dialog" aria-labelledby="chatTitle">
+    <div class="chat-header">
       <div>
-        <h3>NovaShop</h3>
-        <p>Modern shopping made simple.</p>
+        <div class="chat-title" id="chatTitle">Knowledge Assistant</div>
+        <div class="chat-status" id="chatStatus" data-state="online">Online</div>
       </div>
-      <div>
-        <h4>Contact</h4>
-        <p>support@novashop.com</p>
-        <p>+1 (555) 123-4567</p>
-      </div>
-    </footer>
-
-    <!-- Chat widget -->
-    <div class="chat-widget" id="chatWidget">
-      <button class="chat-toggle" id="chatToggle">
-        <span>💬</span>
-      </button>
-
-      <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-          <div>
-            <strong>AI Product Advisor</strong>
-            <div class="chat-status" id="chatStatus">Online</div>
-          </div>
-          <button class="close-chat" id="closeChat">×</button>
-        </div>
-
-        <div class="chat-messages" id="chatMessages"></div>
-
-        <div class="chat-input-area">
-          <input
-            type="text"
-            id="userInput"
-            placeholder="Ask about products..."
-            autocomplete="off"
-          />
-          <button id="sendBtn">Send</button>
-        </div>
-      </div>
+      <button class="close-chat" id="closeChat" type="button" aria-label="Close chat">×</button>
     </div>
 
-    
-  
+    <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
 
-    <script>
-      /* ===== KONFIGURACJA - podmien 3 wartosci ponizej ===== */
-      window.NOVASHOP_CONFIG = {
-        baseUrl:         "https://cpl-websocket.app.parloa.com",
-        clientId:        "app_01M0JARXSXM6GQMDYHQB5Q4SM1",
-        clientSecret:    "parloa_sk_live_LqmAcYe0oMTXNPUHO86lVSqNfsYdu2anavy-Pg",
-        channelConfigId: "3fd1dd2f-2e52-47d4-922b-2a6dd2baa2a9",
-        greetingPrompt:  "hello"
-      };
-    </script>
+    <div class="chat-input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask a question..."
+        autocomplete="off"
+      />
+      <button id="sendBtn" type="button">Send</button>
+    </div>
+  </div>
 
-    <script>
+  <button class="chat-toggle" id="chatToggle" type="button" aria-label="Open chat" aria-expanded="false" aria-controls="chatWindow">
+    <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  /* ===== KONFIGURACJA Parloa - podmien wartosci ponizej ===== */
+  window.CHAT_WIDGET_CONFIG = {
+    baseUrl:         "https://cpl-websocket.app.parloa.com",
+    clientId:        "app_01M0JARXSXM6GQMDYHQB5Q4SM1",
+    clientSecret:    "parloa_sk_live_LqmAcYe0oMTXNPUHO86lVSqNfsYdu2anavy-Pg",
+    channelConfigId: "3fd1dd2f-2e52-47d4-922b-2a6dd2baa2a9",
+    greetingPrompt:  "hello"
+  };
+</script>
+
+<script>
 /* ============================================================
-   NovaShop – chat widget (Power Pages, bez backendu)
+   Knowledge Assistant – chat widget (Power Pages, bez backendu)
    Woła Parloa Chat API bezpośrednio z przeglądarki.
-   Zastępuje oryginalny app.js + server.js.
+   Teksty widgetu podążają za przełącznikiem EN | DE na stronie.
    ============================================================ */
 (function () {
   "use strict";
 
-  var cfg = window.NOVASHOP_CONFIG || {};
+  var cfg = window.CHAT_WIDGET_CONFIG || {};
   var BASE_URL = cfg.baseUrl || "https://cpl-websocket.app.parloa.com";
   var CLIENT_ID = cfg.clientId || "";
   var CLIENT_SECRET = cfg.clientSecret || "";
@@ -720,14 +574,71 @@ a {
   var threadId = null;
   var token = null;
   var chatOpened = false;
+  var statusKey = "online";
 
+  var chatWidget = document.getElementById("chatWidget");
   var chatToggle = document.getElementById("chatToggle");
-  var chatWindow = document.getElementById("chatWindow");
   var closeChat = document.getElementById("closeChat");
+  var chatTitle = document.getElementById("chatTitle");
   var chatMessages = document.getElementById("chatMessages");
   var userInput = document.getElementById("userInput");
   var sendBtn = document.getElementById("sendBtn");
   var chatStatus = document.getElementById("chatStatus");
+
+  /* ---------- teksty EN / DE ---------- */
+
+  var I18N = {
+    en: {
+      title: "Knowledge Assistant",
+      placeholder: "Ask a question...",
+      send: "Send",
+      open: "Open chat",
+      close: "Close chat",
+      online: "Online",
+      typing: "Typing...",
+      connecting: "Connecting...",
+      offline: "Offline",
+      noAnswer: "No answer came back. Try rephrasing your question.",
+      error: "The assistant isn't responding right now. Try again in a moment."
+    },
+    de: {
+      title: "Wissensassistent",
+      placeholder: "Stellen Sie eine Frage...",
+      send: "Senden",
+      open: "Chat öffnen",
+      close: "Chat schließen",
+      online: "Online",
+      typing: "Schreibt...",
+      connecting: "Verbindung wird aufgebaut...",
+      offline: "Offline",
+      noAnswer: "Es kam keine Antwort. Formulieren Sie Ihre Frage bitte anders.",
+      error: "Der Assistent antwortet gerade nicht. Bitte versuchen Sie es gleich noch einmal."
+    }
+  };
+
+  function currentLang() {
+    return document.body.classList.contains("lang-de") ? "de" : "en";
+  }
+
+  function t(key) {
+    return I18N[currentLang()][key];
+  }
+
+  function applyLang() {
+    chatTitle.textContent = t("title");
+    userInput.placeholder = t("placeholder");
+    userInput.setAttribute("aria-label", t("placeholder"));
+    sendBtn.textContent = t("send");
+    closeChat.setAttribute("aria-label", t("close"));
+    chatToggle.setAttribute("aria-label", isOpen() ? t("close") : t("open"));
+    chatStatus.textContent = t(statusKey);
+  }
+
+  // przełącznik EN | DE zmienia klasę na <body> - reagujemy na to
+  new MutationObserver(applyLang).observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
 
   /* ---------- helpery ---------- */
 
@@ -744,7 +655,6 @@ a {
 
   function scrollToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    chatWindow.scrollTop = chatWindow.scrollHeight;
   }
 
   function addMessage(text, type) {
@@ -756,25 +666,44 @@ a {
     return el;
   }
 
+  function isOpen() {
+    return chatWidget.classList.contains("is-open");
+  }
+
   function openChat() {
-    chatWindow.classList.add("open");
-    userInput.focus();
+    chatWidget.classList.add("is-open");
+    chatToggle.setAttribute("aria-expanded", "true");
+    chatToggle.setAttribute("aria-label", t("close"));
+    if (!userInput.disabled) {
+      userInput.focus();
+    }
   }
 
   function closeChatWindow() {
-    chatWindow.classList.remove("open");
+    chatWidget.classList.remove("is-open");
+    chatToggle.setAttribute("aria-expanded", "false");
+    chatToggle.setAttribute("aria-label", t("open"));
   }
 
-  function setBusy(isBusy, statusText) {
+  function setStatus(key) {
+    statusKey = key;
+    chatStatus.textContent = t(key);
+    chatStatus.setAttribute(
+      "data-state",
+      key === "online" ? "online" : key === "offline" ? "offline" : "busy"
+    );
+  }
+
+  function setBusy(isBusy, key) {
     sendBtn.disabled = isBusy;
     userInput.disabled = isBusy;
-    chatStatus.textContent = statusText;
+    setStatus(key);
   }
 
   function failWithBody(res, label) {
     return res.text().then(function (text) {
       console.error(
-        "[NovaShop] " + label + " HTTP " + res.status + " – odpowiedź Parloa:",
+        "[ChatWidget] " + label + " HTTP " + res.status + " – odpowiedź Parloa:",
         text || "(puste body)"
       );
       var err = new Error(label + " HTTP " + res.status);
@@ -788,14 +717,14 @@ a {
     // fetch rzuca TypeError bez szczegółów, gdy zablokuje CORS
     if (err instanceof TypeError) {
       console.error(
-        "[NovaShop] Żądanie do Parloa nie doszło do skutku. Najczęstsza przyczyna: " +
+        "[ChatWidget] Żądanie do Parloa nie doszło do skutku. Najczęstsza przyczyna: " +
           "domena " +
           window.location.origin +
           " nie jest dozwolona w CORS po stronie Parloa. " +
           "Poproś Parloa o dopisanie jej do allowed origins."
       );
     } else {
-      console.error("[NovaShop] Parloa error:", err);
+      console.error("[ChatWidget] Parloa error:", err);
     }
   }
 
@@ -811,7 +740,7 @@ a {
       },
       body: JSON.stringify({
         participantDisplayName: "Website Visitor",
-        connectionMetadata: { source: "custom-shop-frontend" }
+        connectionMetadata: { source: "knowledge-assistant-demo" }
       })
     })
       .then(function (res) {
@@ -827,8 +756,6 @@ a {
   }
 
   // Czyta strumień SSE i na bieżąco dopisuje tekst do dymka bota.
-  // To ta sama pętla, którą miał server.js - tylko wykonana w przeglądarce,
-  // więc odpowiedź pojawia się na żywo zamiast dopiero na końcu.
   function runConversation(message, onDelta) {
     return fetch(BASE_URL + "/v3/ag-ui/runs", {
       method: "POST",
@@ -920,99 +847,72 @@ a {
         /* pomijamy niepełne linie */
       }
     }
-    onDelta(answer);
+    if (answer) {
+      onDelta(answer);
+    }
     return answer;
   }
 
   /* ---------- logika czatu ---------- */
 
-  // Tworzy dymek bota dopiero przy pierwszym fragmencie odpowiedzi,
-  // potem tylko podmienia jego treść.
+  // Pokazuje kropki "pisze...", a przy pierwszym fragmencie odpowiedzi
+  // podmienia je na dymek bota i dalej tylko aktualizuje jego treść.
   function makeStreamTarget() {
+    var typingEl = document.createElement("div");
+    typingEl.className = "bot-message typing";
+    typingEl.setAttribute("aria-hidden", "true");
+    typingEl.innerHTML = "<span></span><span></span><span></span>";
+    chatMessages.appendChild(typingEl);
+    scrollToBottom();
+
     var bubble = null;
-    return function (fullText) {
+
+    function clearTyping() {
+      if (typingEl && typingEl.parentNode) {
+        typingEl.parentNode.removeChild(typingEl);
+      }
+      typingEl = null;
+    }
+
+    function onDelta(fullText) {
+      clearTyping();
       if (!bubble) {
         bubble = addMessage("", "bot");
       }
       bubble.textContent = fullText;
       scrollToBottom();
-    };
+    }
+
+    onDelta.done = clearTyping;
+    return onDelta;
   }
 
   function ask(message, isRetry) {
-    setBusy(true, "Typing...");
-    var onDelta = makeStreamTarget();
+    var hasSession = !!(threadId && token);
+    setBusy(true, hasSession ? "typing" : "connecting");
+    var stream = makeStreamTarget();
 
-    var ready = threadId && token ? Promise.resolve() : createSession();
+    var ready = hasSession
+      ? Promise.resolve()
+      : createSession().then(function () {
+          setStatus("typing");
+        });
 
     return ready
       .then(function () {
-        return runConversation(message, onDelta);
+        return runConversation(message, stream);
       })
       .then(function (answer) {
-        setBusy(false, "Online");
+        stream.done();
+        setBusy(false, "online");
         if (!answer) {
-          addMessage("Sorry, I couldn't generate a response.", "bot");
+          addMessage(t("noAnswer"), "bot");
         }
         userInput.focus();
       })
       .catch(function (err) {
+        stream.done();
         explainError(err);
 
         // sesja mogła wygasnąć - jedna próba od zera
-        if (!isRetry && (err.status === 401 || err.status === 403)) {
-          threadId = null;
-          token = null;
-          return ask(message, true);
-        }
-
-        setBusy(false, "Offline");
-        addMessage("Sorry, something went wrong.", "bot");
-      });
-  }
-
-  function startConversation() {
-    if (chatOpened) {
-      return;
-    }
-    chatOpened = true;
-
-    chatMessages.innerHTML = "";
-    setBusy(true, "Connecting...");
-    ask(GREETING_PROMPT);
-  }
-
-  function handleSend() {
-    var message = userInput.value.trim();
-    if (!message || sendBtn.disabled) {
-      return;
-    }
-
-    addMessage(message, "user");
-    userInput.value = "";
-    ask(message);
-  }
-
-  /* ---------- zdarzenia ---------- */
-
-  chatToggle.addEventListener("click", function () {
-    if (chatWindow.classList.contains("open")) {
-      closeChatWindow();
-      return;
-    }
-    openChat();
-    startConversation();
-  });
-
-  closeChat.addEventListener("click", closeChatWindow);
-  sendBtn.addEventListener("click", handleSend);
-
-  userInput.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      handleSend();
-    }
-  });
-})();
-    </script>
-  </body>
-</html>
+        if (!isRetry &&
