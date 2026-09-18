@@ -564,7 +564,15 @@
 (function () {
   "use strict";
 
-  var cfg = window.CHAT_WIDGET_CONFIG || {};
+  // stara nazwa NOVASHOP_CONFIG nadal dziala, gdyby konfiguracja byla wklejona osobno
+  var cfg = window.CHAT_WIDGET_CONFIG || window.NOVASHOP_CONFIG || {};
+
+  if (!cfg.clientId || !cfg.clientSecret || !cfg.channelConfigId) {
+    console.error(
+      "[ChatWidget] Brak konfiguracji Parloa (clientId / clientSecret / channelConfigId). " +
+        "Sprawdz, czy blok CHAT_WIDGET_CONFIG jest na stronie PRZED skryptem widgetu."
+    );
+  }
   var BASE_URL = cfg.baseUrl || "https://cpl-websocket.app.parloa.com";
   var CLIENT_ID = cfg.clientId || "";
   var CLIENT_SECRET = cfg.clientSecret || "";
@@ -715,7 +723,7 @@
 
   function explainError(err) {
     // fetch rzuca TypeError bez szczegółów, gdy zablokuje CORS
-    if (err instanceof TypeError) {
+    if (err && err.name === "TypeError") {
       console.error(
         "[ChatWidget] Żądanie do Parloa nie doszło do skutku. Najczęstsza przyczyna: " +
           "domena " +
@@ -915,4 +923,72 @@
         explainError(err);
 
         // sesja mogła wygasnąć - jedna próba od zera
-        if (!isRetry &&
+        if (!isRetry && (err.status === 401 || err.status === 403)) {
+          threadId = null;
+          token = null;
+          return ask(message, true);
+        }
+
+        setBusy(false, "offline");
+        addMessage(t("error"), "bot");
+      });
+  }
+
+  function startConversation() {
+    if (chatOpened) {
+      return;
+    }
+    chatOpened = true;
+
+    chatMessages.innerHTML = "";
+    ask(GREETING_PROMPT);
+  }
+
+  function handleSend() {
+    var message = userInput.value.trim();
+    if (!message || sendBtn.disabled) {
+      return;
+    }
+
+    addMessage(message, "user");
+    userInput.value = "";
+    ask(message);
+  }
+
+  /* ---------- zdarzenia ---------- */
+
+  chatToggle.addEventListener("click", function () {
+    if (isOpen()) {
+      closeChatWindow();
+      return;
+    }
+    openChat();
+    startConversation();
+  });
+
+  closeChat.addEventListener("click", function () {
+    closeChatWindow();
+    chatToggle.focus();
+  });
+
+  sendBtn.addEventListener("click", handleSend);
+
+  userInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && isOpen()) {
+      closeChatWindow();
+      chatToggle.focus();
+    }
+  });
+
+  applyLang();
+})();
+</script>
+
+</body>
+</html>
